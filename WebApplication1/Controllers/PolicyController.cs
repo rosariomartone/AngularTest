@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 using WebApplication1.Data;
 
 namespace WebApplication1.Controllers
@@ -20,16 +22,16 @@ namespace WebApplication1.Controllers
             return JsonConvert.SerializeObject(_policyRepository.Get(), Formatting.Indented);
         }
 
-        //[HttpPost]
-        //[Route("Create/{policy}")]
-        //public void Create(Policy policy)
-        //{
-        //    _policyRepository.Add(policy);
-        //}
+        [HttpPost]
+        [Route("Create/{policyNumber}")]
+        public void Create([FromBody] Policy policy)
+        {
+            _policyRepository.Add(policy);
+        }
 
         [HttpPost]
         [Route("Update/{policyNumber}")]
-        public void Update(Policy policy)
+        public void Update([FromBody] Policy policy)
         {
             _policyRepository.Update(policy);
         }

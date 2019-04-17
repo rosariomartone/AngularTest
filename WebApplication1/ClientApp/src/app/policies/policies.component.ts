@@ -34,10 +34,10 @@ export class PoliciesComponent implements OnInit {
     {
       await this.policiesService.updatePolicy(this.selectedPolicy);
     }
-    //else
-    //{
-    //  await this.policiesService.createPolicy(this.selectedPolicy);
-    //}
+    else
+    {
+      await this.policiesService.createPolicy(this.selectedPolicy);
+    }
 
     this.selectedPolicy = new Policy();
 
