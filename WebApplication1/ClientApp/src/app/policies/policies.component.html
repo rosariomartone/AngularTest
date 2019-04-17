@@ -17,6 +17,14 @@
       <th mat-header-cell *matHeaderCellDef> Gender</th>
       <td mat-cell *matCellDef="let policy"> {{policy.policyHolder.Gender}}</td>
     </ng-container>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let policy">
+        <button mat-icon-button (click)="editPolicy(policy)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let policy">
@@ -28,4 +36,25 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <mat-divider fxShow="false" fxShow.gt-sm [vertical]="true"></mat-divider>
+  <div>
+    <h2>Selected Policy</h2>
+    <label>
+      Number
+      <input type="number" [(ngModel)]="selectedPolicy.policyNumber">
+    </label>
+    <label>
+      Name
+      <input type="text" [(ngModel)]="selectedPolicy.policyHolder.name">
+    </label>
+    <label>
+      Age
+      <input type="number" [(ngModel)]="selectedPolicy.policyHolder.age">
+    </label>
+    <button mat-flat-button color="primary" (click)="updatePolicy()">{{(selectedPolicy.policyNumber!==undefined)?'Update':'Create'}}</button>
+    <button mat-flat-button color="primary" (click)="clearPolicy()">Clear</button>
+  </div>
+  <div class="loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>

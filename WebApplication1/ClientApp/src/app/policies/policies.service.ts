@@ -27,6 +27,14 @@ export class PoliciesService {
     return this.request('get', `${baseUrl}/api/Policies`);
   }
 
+  //createPolicy(policy: Policy) {
+  //  return this.request('post', `${baseUrl}/api/Policies/Create}`, policy);
+  //}
+
+  updatePolicy(policy: Policy) {
+    return this.request('post', `${baseUrl}/api/Policies/Update/${policy.policyNumber}`, policy);
+  }
+
   deletePolicy(policyNumber: number) {
     return this.request('delete', `${baseUrl}/api/Policies/Delete/${policyNumber}`);
   }

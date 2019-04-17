@@ -20,8 +20,22 @@ namespace WebApplication1.Controllers
             return JsonConvert.SerializeObject(_policyRepository.Get(), Formatting.Indented);
         }
 
+        //[HttpPost]
+        //[Route("Create/{policy}")]
+        //public void Create(Policy policy)
+        //{
+        //    _policyRepository.Add(policy);
+        //}
+
+        [HttpPost]
+        [Route("Update/{policyNumber}")]
+        public void Update(Policy policy)
+        {
+            _policyRepository.Update(policy);
+        }
+
         [HttpDelete]
-        [Route("api/Policies/Delete/{id}")]
+        [Route("Delete/{policyNumber}")]
         public void Delete(int policyNumber)
         {
             _policyRepository.Remove(policyNumber);

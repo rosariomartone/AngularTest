@@ -16,10 +16,10 @@ export class PoliciesComponent implements OnInit {
     this.refresh();
   }
 
-  displayedColumns: string[] = ['policyNumber', 'name', 'age', 'gender', 'delete'];
+  displayedColumns: string[] = ['policyNumber', 'name', 'age', 'gender', 'edit', 'delete'];
   dataSource = new MatTableDataSource<any>();
 
-  selectedProduct: Policy = new Policy();
+  selectedPolicy: Policy = new Policy();
   loading = false;
 
   async refresh() {
@@ -29,11 +29,34 @@ export class PoliciesComponent implements OnInit {
     this.loading = false;
   }
 
+  async updatePolicy() {
+    if (this.selectedPolicy.policyNumber !== undefined)
+    {
+      await this.policiesService.updatePolicy(this.selectedPolicy);
+    }
+    //else
+    //{
+    //  await this.policiesService.createPolicy(this.selectedPolicy);
+    //}
+
+    this.selectedPolicy = new Policy();
+
+    await this.refresh();
+  }
+
+  editPolicy(policy: Policy) {
+    this.selectedPolicy = policy;
+  }
+
+  clearPolicy() {
+    this.selectedPolicy = new Policy();
+  }
+
   async deletePolicy(policy: Policy) {
     this.loading = true;
 
     if (confirm(`Are you sure you want to delete the policy ${policy.policyNumber}. This cannot be undone.`)) {
-      this.policiesService.deletePolicy(policy);
+      this.policiesService.deletePolicy(Number(policy.policyNumber));
     }
 
     await this.refresh();
